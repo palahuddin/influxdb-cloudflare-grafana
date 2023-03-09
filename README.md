@@ -1,5 +1,7 @@
 # Worker Script Generate Cloudflare Data to InfluxDB Grafana
 
+Reference: https://github.com/jorgedlcruz/cloudflare-grafana
+
 ## CronJob Get CloudFlare Data
 
 ```bash

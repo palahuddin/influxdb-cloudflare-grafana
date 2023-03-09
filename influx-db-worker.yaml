@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: influxdbv1-worker
+  name: influxdbv1-worker
+spec:
+  volumes:
+  - name: influxdbv1-worker
+    secret:
+      secretName: influxdbv1-worker
+      defaultMode: 0777
+  containers:
+  - command:
+    - bash
+    - "/app/script"
+    image: falahalaf/busybox
+    name: influxdbv1-worker
+    imagePullPolicy: Always
+    volumeMounts:
+    - name: influxdbv1-worker
+      readOnly: true
+      mountPath: "/app"

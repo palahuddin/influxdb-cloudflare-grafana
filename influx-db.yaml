@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: influxdbv1
+  name: influxdbv1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdbv1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: influxdbv1
+    spec:
+      volumes:
+      - name: var-lib-influxdbv1
+        persistentVolumeClaim:
+          claimName: influxdbv1-pv-claim
+      containers:
+      - image: influxdb:1.8
+        name: influxdbv1
+        envFrom:
+        - secretRef:
+            name: influxdbv1-creds
+        volumeMounts:
+        - mountPath: /var/lib/influxdb
+          name: var-lib-influxdbv1
